@@ -10,26 +10,6 @@ Pod::Spec.new do |s|
   s.module_name = 'GRDB'
   
   s.swift_versions = ['5.2']
-  s.ios.deployment_target = '10.0'
-  s.osx.deployment_target = '10.10'
-  s.watchos.deployment_target = '2.0'
-  s.tvos.deployment_target = '9.0'
-  s.default_subspec  = 'standard'
-  
-  s.subspec 'standard' do |ss|
-    ss.source_files = 'GRDB/**/*.swift', 'Support/grdb_config.h'
-    ss.framework = 'Foundation'
-    ss.library = 'sqlite3'
-  end
-  
-  s.subspec 'SQLCipher' do |ss|
-    ss.source_files = 'GRDB/**/*.swift', 'Support/SQLCipher_config.h'
-    ss.framework = 'Foundation'
-    ss.dependency 'SQLCipher', '>= 3.4.0'
-    ss.xcconfig = {
-      'OTHER_SWIFT_FLAGS' => '$(inherited) -D SQLITE_HAS_CODEC -D GRDBCIPHER -D SQLITE_ENABLE_FTS5',
-      'OTHER_CFLAGS' => '$(inherited) -DSQLITE_HAS_CODEC -DGRDBCIPHER -DSQLITE_ENABLE_FTS5',
-      'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) SQLITE_HAS_CODEC=1 GRDBCIPHER=1 SQLITE_ENABLE_FTS5=1'
-    }
-  end
+  s.platform = :ios, '10.0'
+  s.vendored_frameworks = 'GRDB.xcframework'
 end
